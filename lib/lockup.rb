@@ -27,7 +27,8 @@ module Lockup
 
   def check_for_lockup
     return unless respond_to?(:lockup) && lockup_codeword
-    return if cookies[:lockup].present? && cookies[:lockup] == lockup_codeword.to_s.downcase
+    # return if cookies[:lockup].present? && cookies[:lockup] == lockup_codeword.to_s.downcase
+    return if session[:lockup].present? && session[:lockup] == lockup_codeword.to_s
 
     redirect_to lockup.unlock_path(
       return_to: request.fullpath.split('?lockup_codeword')[0],
